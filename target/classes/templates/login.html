@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login Page</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <form id="loginForm" class="form" method="post" action="login">
+                <div class ="input-form">
+                    <h1>Login</h1>
+                    <div class="input-group">
+                        <input type="text" placeholder="Username" name="username">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" placeholder="Password" name="password">
+                    </div>
+                    <div class="error" th:if="${error_login}" th:text="${error_login}"></div>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+            <p>Don't have an account? <a href="register">Register now!</a></p>
+        </div>
+    </body>
+</html>

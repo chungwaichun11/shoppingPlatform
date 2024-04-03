@@ -1,0 +1,198 @@
+body {
+    margin: 0;
+}
+
+.top-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 15px;
+}
+
+.cta-buttons {
+    width: 95%;
+    margin: 0 auto 0;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto 0;
+    padding-top: 100px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    width: 100%;
+}
+
+.input-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    font-weight: bold;
+    justify-content: space-between;
+
+}
+
+.sub-title {
+    width: 40%;
+    display: flex;
+    font-weight: bolder;
+
+}
+
+.flex-hor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error {
+    font-size: 15px;
+    font-weight:bolder;
+    margin-block: 10px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    width: 100%;
+    margin-block: 7px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"]  {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 80%;
+    padding: 10px;
+    margin-block: 18px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.product-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product {
+    width: 27%;
+    height: fit-content;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-block: 10px;
+    padding-block: 5px;
+    padding-inline: 12px;
+}
+
+.product-details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    font-size: large;
+}
+
+.product-details-item{
+    width: 100%;
+    margin-block: 10px;
+}
+
+.transaction {
+    width: 40%;
+    height: fit-content;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-block: 10px;
+    padding-block: 5px;
+    padding-inline: 12px;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.button-div{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: large;
+    margin-top: 15px;
+}
+
+.button-div > a {
+    width: 40%;
+    padding: 10px;
+    margin-block: 18px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

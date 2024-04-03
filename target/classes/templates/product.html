@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Product Page </title>
+        <link rel="stylesheet" type="text/css" href="/style.css">        
+    </head>
+    <body>
+        <div th:object="${user}">
+            <nav class="top-navigation">
+                <div class="cta-buttons">
+                    <a class="btn" th:href="@{/users/{userId}(userId=${user.userId})}">Profile</a>
+                    <a class="btn" th:href="@{/add-item}">Add Item</a>
+                    <a class="btn" th:href="@{/home(username=${user.username})}">Home</a>
+                    <a class="btn" th:href="@{/logout}">Logout</a>
+                </div>
+            </nav>
+
+            <div class="container" th:object="${product}">
+
+                <div class="page-title">
+                    <h1 class="product-name" th:text="${product.productName} + ' - #' + ${product.productId}"> </h1>
+                    <h1 class="product-name" th:text="${product.status}"> </h1>
+                </div>
+
+                <div class="product-details">
+                    <div class="flex-hor product-details-item">
+                        <div class="sub-title">Price: </div>
+                        <div th:text="'$' + ${product.price}"></div>
+                    </div>                    
+                    <div class="flex-hor product-details-item">
+                        <div class="sub-title">Seller: </div>
+                        <div th:text="${product.seller.username}"></div>
+                    </div>
+                    <div class="flex-hor product-details-item">
+                        <div class="sub-title">Description: </div>
+                        <div th:text="${product.description}"></div>
+                    </div>
+                </div>
+
+                <form class="form" th:action="@{/product/{productId}(productId=${product.productId})/purchase}" method="post">
+                    <div>
+                        <input type="hidden" name="product" th:value="${product.productId}" />
+                    </div>
+
+                    <div>
+                        <input type="hidden" name="buyer" th:value="${user.userId}" />
+                    </div>
+
+                    <div>
+                        <input type="hidden" name="seller" th:value="${product.seller.userId}" />
+                    </div>
+                    
+                    <button th:if="${product.seller.userId} != ${user.userId}" type="submit">Purchase</button>
+
+                </form>
+                <div class="flex-hor button-div">
+                    <a class="btn" th:if="${product.seller.userId == user.userId && product.transaction == null}" th:href="@{/edit-product/{productId}(productId=${product.productId})}">Edit</a>
+                    <a class="btn" th:if="${product.seller.userId == user.userId && product.transaction == null}" th:href="@{/delete-product/{productId}(productId=${product.productId})}">Delete</a>
+                </div>
+                
+            </div>
+        </div>
+    </body>
+</html>
+

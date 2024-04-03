@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile Page </title>
+        <link rel="stylesheet" type="text/css" href="/style.css">        
+    </head>
+    <body>
+        <nav class="top-navigation"  th:object="${user}">
+            <div class="cta-buttons">
+                <a class="btn" th:href="@{/users/{userId}(userId=${user.userId})}">Profile</a>
+                <a class="btn" th:href="@{/add-item}">Add Item</a>
+                <a class="btn" th:href="@{/home(username=${user.username})}">Home</a>
+                <a class="btn" th:href="@{/logout}">Logout</a>
+            </div>
+        </nav>
+
+        <div class="container" th:object="${user}">
+
+            <div class="page-title">
+                <h1>Profile</h1>
+            </div>
+
+            <form id="profileForm" class="form" method="post" th:action="@{/users/update/{userId}(userId=${user.userId})}">
+                <div class ="input-form">
+                    <div class="input-group flex-hor">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" th:value="*{username}" readonly>
+                    </div>
+                    <div class="input-group flex-hor">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" th:value="*{email}">
+                    </div>
+                    <div class="input-group flex-hor">
+                        <label for="address">Adress:</label>
+                        <input type="text" id="address" name="address" th:value="*{address}">
+                    </div>                  
+                    <input type="hidden" id="password" name="password" th:value="*{password}">
+                    <div class="error" th:if="${error_update}" th:text="${error_update}"></div>
+                    <button type="submit">Update</button>
+                </div>
+            </form>
+
+            <div class="page-title">
+                <h1>Your Items</h1>
+            </div>
+
+            <div class="product-list">
+                <a th:each="product : ${products}" class="product" th:href="@{/product/{productId}(productId=${product.productId})}">
+                    <p th:text="${product.productName}" />
+                    <p th:text="${product.status}" />
+                </a>
+            </div>
+
+            <div class="page-title">
+                <h1>Your Transaction (As a buyer)</h1>
+            </div>
+
+            <div class="product-list">
+                <a th:each="transaction : ${transactions_bought}" class="transaction" th:href="@{/transaction/{transactionId}(transactionId=${transaction.transactionId})}">
+                    <p th:text="${transaction.product.productName}" />
+                    <p th:text="${transaction.status}" />
+                </a>
+            </div>
+
+            <div class="page-title">
+                <h1>Your Transaction (As a seller)</h1>
+            </div>
+
+            <div class="product-list">
+                <a th:each="transaction : ${transactions_sold}" class="transaction" th:href="@{/transaction/{transactionId}(transactionId=${transaction.transactionId})}">
+                    <p th:text="${transaction.product.productName}" />
+                    <p th:text="${transaction.status}" />
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

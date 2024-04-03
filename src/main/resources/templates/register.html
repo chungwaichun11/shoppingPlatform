@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Page</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <form id="registerForm" class="form" method="post" action="register">
+                <div class ="input-form">
+                    <h1>Register</h1>
+                    <div class="input-group">
+                        <input type="text" placeholder="Username" name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" placeholder="Password" name="password" required>
+                    </div>
+                    <div class="error" th:if="${error_register}" th:text="${error_register}"></div>
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+            <p>Already have an account? <a href="login">Login now!</a></p>
+        </div>
+    </body>
+</html>

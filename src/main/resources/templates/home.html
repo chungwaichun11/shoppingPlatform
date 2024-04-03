@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <nav class="top-navigation"  th:object="${user}">
+        <div class="cta-buttons">
+            <a class="btn" th:href="@{/users/{userId}(userId=${user.userId})}">Profile</a>
+            <a class="btn" th:href="@{/add-item}">Add Item</a>
+            <a class="btn" th:href="@{/home(username=${user.username})}">Home</a>
+            <a class="btn" href="logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-title">
+            <h1>Welcome Back <span th:text="${user.username}"></span></h1>
+        </div>
+
+        <div class="product-list">
+            <a th:each="product : ${products}" class="product" th:href="@{/product/{productId}(productId=${product.productId})}">
+                <p th:text="${product.productName}" />
+                <p th:text="'$' + ${product.price}" />
+            </a>
+        </div>
+    </div>
+</body>
+</html>

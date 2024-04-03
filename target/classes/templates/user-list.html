@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Users</title>
+    </head>
+    
+    <body>
+
+        <div th:each="user : ${users}">
+            <p th:text="${user.userId}" />
+            <p th:text="${user.username}" />
+            <a th:href="@{/home(username=${user.username})}">home page</a>
+        </div>
+
+
+    </body>
+</html>

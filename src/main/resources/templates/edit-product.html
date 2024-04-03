@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile Page </title>
+        <link rel="stylesheet" type="text/css" href="/style.css">        
+    </head>
+    <body>
+        <nav class="top-navigation"  th:object="${user}">
+            <div class="cta-buttons">
+                <a class="btn" th:href="@{/users/{userId}(userId=${user.userId})}">Profile</a>
+                <a class="btn" th:href="@{/add-item}">Add Item</a>
+                <a class="btn" th:href="@{/home(username=${user.username})}">Home</a>
+                <a class="btn" th:href="@{/logout}">Logout</a>
+            </div>
+        </nav>
+
+        <div class="container" th:object="${product}">
+
+            <div class="page-title">
+                <h1 class="product-name" th:text="${product.productName} + ' - #' + ${product.productId}"> </h1>
+            </div>
+
+            <form id="productEditForm" class="form" method="post" th:action="@{/edit-product/{productId}(productIdId=${product.productId})}">
+                <div class ="input-form">
+                    <div class="input-group flex-hor">
+                        <input type="hidden" id="productId" name="productId" th:value="*{productId}" required>
+                    </div>            
+                    
+                    <div class="input-group flex-hor">
+                        <label for="productName">Seller: </label>
+                        <input type="text" th:value="*{seller.username}" readonly>
+                        <input type="hidden" id="seller" name="seller" th:value="*{seller.userId}" readonly>
+                    </div>
+
+                    <div class="input-group flex-hor">
+                        <label for="productName">Product Name:</label>
+                        <input type="text" id="productName" name="productName" th:value="*{productName}" readonly>
+                    </div>
+                    <div class="input-group flex-hor">
+                        <label for="price">Price:</label>
+                        <input type="text" id="price" name="price" th:value="*{price}" required>
+                    </div>
+                    <div class="input-group flex-hor">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" th:field="*{description}" required> </textarea>
+                    </div>         
+
+                    <div class="error" th:if="${error_update}" th:text="${error_update}"></div>
+                    <button type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

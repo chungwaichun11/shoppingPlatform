@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Item Page </title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="top-navigation"  th:object="${user}">
+            <div class="cta-buttons">
+                <a class="btn" th:href="@{/users/{userId}(userId=${user.userId})}">Profile</a>
+                <a class="btn" th:href="@{/add-item}">Add Item</a>
+                <a class="btn" th:href="@{/home(username=${user.username})}">Home</a>
+                <a class="btn" href="logout">Logout</a>
+            </div>
+        </nav>
+
+        <div class="container" th:object="${user}">
+            <div class="page-title">
+                <h1>Add new item</h1>
+            </div>
+
+            <form id="propductForm" class="form" method="post" th:action="add">
+                <div class ="input-form">
+                    <div class="input-group flex-hor">
+                        <label for="productName">Seller: </label>
+                        <input type="text" th:value="*{username}" readonly>
+                        <input type="hidden" id="seller" name="seller" th:value="*{userId}" readonly>
+                    </div>
+                    <div class="input-group flex-hor">
+                        <label for="productName">Name: </label>
+                        <input type="text" id="productName" name="productName" required>
+                    </div>
+                    <div class="input-group flex-hor">
+                        <label for="price">Price:</label>
+                        <input type="text" id="price" name="price" required>
+                    </div>
+                    <div class="input-group flex-hor">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" required> </textarea>
+                    </div>
+                    <button type="submit">Add</button>
+
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

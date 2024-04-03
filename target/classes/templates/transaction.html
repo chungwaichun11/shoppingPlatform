@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Transaction Page </title>
+        <link rel="stylesheet" type="text/css" href="/style.css">        
+    </head>
+    <body>
+        <div th:object="${user}">
+            <nav class="top-navigation">
+                <div class="cta-buttons">
+                    <a class="btn" th:href="@{/users/{userId}(userId=${user.userId})}">Profile</a>
+                    <a class="btn" th:href="@{/add-item}">Add Item</a>
+                    <a class="btn" th:href="@{/home(username=${user.username})}">Home</a>
+                    <a class="btn" th:href="@{/logout}">Logout</a>
+                </div>
+            </nav>
+
+            <div class="container" th:object="${transaction}">
+
+                <div class="page-title">
+                    <h1 class="product-name" th:text="'Transaction #' + ${transaction.transactionId}"> </h1>
+                    <h1 class="product-name" th:text="${transaction.status}"> </h1>
+                </div>
+
+                <form th:action="@{/transaction/{transactionId}(transactionId=${transaction.transactionId})/update}" method="post" class="form">
+                    <div class="product-details">
+                        <div class="flex-hor product-details-item">
+                            <input type="hidden" name="transactionId" th:value="${transaction.transactionId}" />
+                        </div>
+                        <div class="flex-hor product-details-item">
+                            <div class="sub-title">Product Name: </div>
+                            <div th:text="${transaction.product.productName}"></div>
+                            <input type="hidden" name="product" th:value="${transaction.product.productId}" />
+                        </div>
+
+                        <div class="flex-hor product-details-item">
+                            <div class="sub-title">Buyer: </div>
+                            <div th:text="${transaction.buyer.username}"></div>
+                            <input type="hidden" name="buyer" th:value="${transaction.buyer.userId}" />
+                        </div>
+
+                        <div class="flex-hor product-details-item">
+                            <div class="sub-title">Seller: </div>
+                            <div th:text="${transaction.seller.username}"></div>
+                            <input type="hidden" name="seller" th:value="${transaction.seller.userId}" />
+
+                        </div>
+
+                        <div class="flex-hor product-details-item">
+                            <div class="sub-title">Payment Status: </div>
+                            <div>
+                                <label>
+                                    <input type="radio" name="paid" value="true" th:checked="${transaction.paid ? 'checked': null}" 
+                                    th:attr="disabled=${transaction.status == 'COMPLETED' || user.userId == transaction.seller.userId || transaction.paid} ? 'disabled' : null" />
+                                    True
+                                </label>
+                                <label>
+                                    <input type="radio" name="paid" value="false" th:checked="${transaction.paid ? null : 'checked'}" 
+                                    th:attr="disabled=${transaction.status == 'COMPLETED' || user.userId == transaction.seller.userId || transaction.paid} ? 'disabled' : null" />
+                                    False
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-hor product-details-item" >
+                            <div class="sub-title">Delivery Status: </div>
+                            <div>
+                                <label>
+                                    <input type="radio" name="received" value="true" th:checked="${transaction.received ? 'checked': null}" 
+                                    th:attr="disabled=${transaction.status == 'COMPLETED' || user.userId == transaction.buyer.userId || transaction.received} ? 'disabled' : null" />
+                                    True
+                                </label>
+                                <label>
+                                    <input type="radio" name="received" value="false" th:checked="${transaction.received ? null :'checked'}"  
+                                    th:attr="disabled=${transaction.status == 'COMPLETED' || user.userId == transaction.buyer.userId || transaction.received} ? 'disabled' : null" />
+                                    False
+                                </label>
+                            </div>
+                        </div>
+                        
+
+                        <div class="flex-hor product-details-item">
+                            <div class="sub-title">Transaction creation date: </div>
+                            <div th:text="${transaction.createDate}"></div>
+                            <input type="hidden" name="createDate" th:value="${transaction.createDate}" />
+
+                        </div>
+
+                        <div class="flex-hor product-details-item" th:if="${transaction.status} == 'COMPLETED'">
+                            <div class="sub-title">Transaction complete date: </div>
+                            <div th:text="${transaction.completeDate}"></div>
+                        </div>
+                    </div>
+                    <button th:if="${transaction.status} != 'COMPLETED'" type="submit">Update</button>
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
